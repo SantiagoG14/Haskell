@@ -1,15 +1,16 @@
 import Data.Char
 
 let2int :: Char -> Int 
-let2int c = ord c - ord 'a'
+let2int c | isLower c = ord c - ord 'a'
+          | otherwise = ord c - ord 'A' + 27
 
 int2let :: Int -> Char 
-int2let n = chr (ord 'a' + n)
+int2let n | n < 27 = chr (ord 'a' + n)
+          | otherwise = chr (ord 'A' + n - 27)
 
 shift :: Int -> Char -> Char
-
 shift n c | isLower c = int2let ((let2int c + n) `mod` 26)
-          | otherwise = c
+          | otherwise = int2let ((let2int c + n) `mod` 52)
 
 encode :: Int -> String -> String 
 encode n xs  = [shift n x | x <- xs]
@@ -27,8 +28,8 @@ lowers :: String -> Int
 lowers xs = length [x | x <- xs, x >= 'a' && x <= 'z']
 
 freqs :: String -> [Float]
-freqs xs = [percent (count x xs) n | x <- ['a'..'z']]
-           where n = lowers xs
+freqs xs = [percent (count x xs) n | x <- ['a'..'z'] ]
+          -- where n = lowers xs
 
 chisqr :: [Float]  -> [Float] -> Float 
 chisqr os es = sum [((o - e) ^ 2) / e | (o, e) <- zip os es]

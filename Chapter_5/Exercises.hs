@@ -1,12 +1,12 @@
 --1. Using a list comprehesions give an expresion that calculates the sum 1^2 + 2^2+ ... + 100^2 of the first 100 integerSquares
 
-sumFirst100IntegerSquares :: Int
-sumFirst100IntegerSquares = sum [x ^ 2 | x <- [1..100]]
+integerSquares :: Int
+integerSquares = sum [x^2 | x <- [1..100]]
 
 --2. Grid
 
 grid :: Int -> Int -> [(Int, Int)]
-grid m n = [(x, y) | x <- [0..m], y <- [0..n]]
+grid n m = [(i,j) | i <-[0..n], j <- [0..m] ]
 
 --3 square
 
