@@ -59,6 +59,8 @@ sgetLine = do x <- getCh
                    xs <- sgetLine
                    return (x:xs)
 
+
+
 getCh :: IO Char 
 getCh = do hSetEcho stdin False
            x <- getChar
